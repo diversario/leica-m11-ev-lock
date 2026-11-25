@@ -1,0 +1,35 @@
+# Leica M11-D, firmware 2.6.4: exposure lock fix.
+#
+# Apply with:
+#   python3 apply.py m11-d_2.6.4.patch LEICA_M11-D_2.6.4.FW
+
+# SHA-256 of Leica's file, LEICA_M11-D_2.6.4.FW. The patch is for this file only.
+stock-sha256          cfb9051b7b739baf7a450737df82d44698f572cc218d696c7d91ab8ccb829380
+
+# SHA-256 of the two files that apply.py writes.
+fixed-sha256          0dadc9a2b6d31d65e1e06598fe59ba1e29f986074b43a4627c7944fb7889e41c
+back-to-stock-sha256  ffa1d93fc973a971f5cd831be5a3fb3650478368d8d9594a971775b0d354cd6e
+
+# Version text of the fixed firmware. At most 7 characters.
+label                 2.6.4.1
+
+# The main program is part 83 of the firmware. The camera loads it at this address (hex).
+part                  83
+base                  41000000
+
+# The changed instructions. Each one is a 32-bit word. The file stores the low byte first.
+#
+# address  stock     fixed      fixed instruction
+41166034   ebfffe97  e3000204   movw  r0, #0x204      ; r0 = id of the "AE lock" setting
+41166038   e30d3464  ebff3d15   bl    0x41135494      ; r0 = value of that setting
+4116603c   e344330f  e3500001   cmp   r0, #1
+41166040   e5933000  1a000007   bne   0x41166064      ; not 1: this is a release. Do what stock does
+41166044   e3530002  e3073d74   movw  r3, #0x7d74
+41166048   8a000006  e344333a   movt  r3, #0x433a     ; r3 = 0x433a7d74, address of the "has a reading" byte
+4116604c   e51b3020  e5d33000   ldrb  r3, [r3]
+41166050   e5933004  e3530000   cmp   r3, #0
+41166054   e3a00002  0a000002   beq   0x41166064      ; no reading yet. Do what stock does
+41166058   e30c1844  eb0016f3   bl    0x4116bc2c      ; r0 = the "Ignore AE Lock" flag
+4116605c   e3441220  e3500000   cmp   r0, #0
+41166060   e1a02003  0a000000   beq   0x41166068      ; flag is 0: skip the message. The lock holds
+41166064   ebfead75  ebfffe8b   bl    0x41165a98      ; what stock does: post message 0x44100004

@@ -1,0 +1,3 @@
+# Leica's firmware and the files built from it do not belong in this repo.
+*.FW
+*.fw
