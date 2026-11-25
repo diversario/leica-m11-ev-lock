@@ -326,3 +326,8 @@ This repo has no M11 patch. A fix for the M11 has not been tested on a camera.
 
 - [matnetik/m11-firmware-notes](https://github.com/matnetik/m11-firmware-notes): the firmware file format, and reports of changed firmware on an M11.
 - Leica's [2.6.4 release notes](https://leica-camera.com/sites/default/files/EN_-2.6.4--M-Family-Release-Note.pdf): the update steps.
+
+## License
+
+The files in this repo are under the [MIT license](LICENSE).
+Leica's firmware is not. It belongs to Leica.
