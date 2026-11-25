@@ -330,4 +330,4 @@ This repo has no M11 patch. A fix for the M11 has not been tested on a camera.
 ## License
 
 The files in this repo are under the [MIT license](LICENSE).
-Leica's firmware is not. It belongs to Leica.
+Leica's firmware, and the stock instructions quoted from it, are not. They belong to Leica.
