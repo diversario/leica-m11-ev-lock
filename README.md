@@ -21,6 +21,10 @@ It _did_ work for me: my M11-D runs this firmware, and the bug's gone.
 
 ## The bug
 
+_It is entirely possible that Leica did this completely intentionally,
+and I am missing the reason for this. If that's the case, then, fooled me,
+I guess, but I'll stick with the modified version._
+
 1. Half-press the shutter button. The lock dot shows in the viewfinder.
 2. Right after the press, point the camera at something brighter or darker.
    You have up to about 0.3 seconds for this. The late reading comes that soon after the press.
